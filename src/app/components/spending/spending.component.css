@@ -1,0 +1,32 @@
+.progress-bar {
+  height: 10px;
+  border-radius: 15px;
+}
+
+.card-display {
+  max-width: 75%;
+  padding: 10px;
+  margin: 30px;
+  flex: 1 1 auto;
+
+}
+
+.spacer {
+  flex: 1 1 auto;
+  text-align: right;
+}
+
+.date-center {
+  text-align: center;
+}
+
+.width-margin {
+  width: 60%;
+  margin: 20px;
+}
+
+.example-headers-align .mat-expansion-panel-header-description {
+  justify-content: space-between;
+  align-items: center;
+}
+
