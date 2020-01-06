@@ -3,7 +3,6 @@ export interface Budget {
   amount: number;
   dateFrom?: Date;
   dateTo?: Date;
-  expenseId?: number;
   userId?: number;
   name?: string
 }

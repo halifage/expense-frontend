@@ -26,18 +26,24 @@ export class TransactionsComponent implements OnInit {
 
   expenseTypes: ExpenseType[];
   budgets: Budget[];
+  totalAmount: number;
+
 
   constructor(private expenseService: ExpenseService, private budgetService: BudgetService) { }
 
   ngOnInit() {
 
-    this.expenseService.fetchExpensesByDateRange().subscribe(response => this.expenses = response);
-    this.expenseService.getUpdatedExpenseTypesBehaviorSubject().subscribe(response => this.expenseTypes = response);
+    this.expenseService.fetchExpensesByDateRange().subscribe(response => {
+      this.expenses = response;
+      this.totalAmount = this.expenses.map(expense => expense.amount).reduce((sum, value) => sum + value, 0);
+    });
+    this.expenseService.getUpdatedExpenseTypesBehaviorSubject().subscribe(response => {
+      if (response)
+        this.expenseTypes = response;
+      else
+        this.expenseService.fetchExpenseTypes().subscribe(types => this.expenseTypes = types)
+    });
     this.budgetService.fetchBudgets().subscribe(budgets => this.budgets = budgets);
-  }
-
-  getTotalAmount() {
-    return this.expenses.map(expense => expense.amount).reduce((sum, value) => sum + value, 0);
   }
 
   saveExpense(panel: MatExpansionPanel) {
